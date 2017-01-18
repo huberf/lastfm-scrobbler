@@ -7,7 +7,7 @@ to provide scrobbling capabilities for any service.
 finished or will function as intended.
 
 ## Setup
-* First `git clone https://github.com/huberf/lastfm-scrobbler'
+* First `git clone https://github.com/huberf/lastfm-scrobbler`
 * Make sure you have the `requests` library installed.
 * Create the environment variable `LAST_FM_API` with your [Last.fm API
   Key](http://www.last.fm/api/authentication)
