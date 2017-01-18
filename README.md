@@ -13,3 +13,15 @@ finished or will function as intended.
   Key](http://www.last.fm/api/authentication)
 * Now everything is ready and you simply have to include this file in your
   program and call the `authorize` or `scrobble` functions.
+
+
+## Get user auth token
+* Go to http://www.last.fm/api/auth?api_key={YOUR_API_KEY}&cb=http://localhost:5555
+* Make sure nothing is running at port 5555, as we will be manually retreiving
+  the token.
+* Click "Allow Access"
+* Now copy the token from the resulting url (e.g.
+  `http://localhost:5555/?token={TOKEN_YOU_WANT}`)
+* Now run the `authorize` function in this library with this token as the
+  parameter.
+* Profit?
