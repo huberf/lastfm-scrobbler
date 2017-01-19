@@ -25,3 +25,9 @@ finished or will function as intended.
 * Now run the `authorize` function in this library with this token as the
   parameter.
 * Profit?
+
+## Scrobbling
+* Import 'lastfm' into any project you want, and run the 'scrobble' function
+  supplying the song name, artist name, and user auth token. The library will
+  handle the rest. **Note:** This functionality does not fully function at this
+  time.

@@ -14,6 +14,6 @@ def authorize(user_token):
     apiResp = requests.post(api_head, params)
     return apiResp.text
 
-def scrobble(song_name, artist_name):
-    apiResp = requests.post('http://ws.audioscrobbler.com/2.0/', {'method': 'track.updateNowPlaying', 'apiKey': os.environ['LAST_FM_API'], 'track': song_name, 'artist': artist_name})
+def scrobble(song_name, artist_name, session_key):
+    apiResp = requests.post('http://ws.audioscrobbler.com/2.0/', {'method': 'track.updateNowPlaying', 'apiKey': os.environ['LAST_FM_API'], 'track': song_name, 'artist': artist_name, 'sk': session_key})
     print apiResp.text
