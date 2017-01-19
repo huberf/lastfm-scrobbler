@@ -7,13 +7,26 @@ api_head = 'http://ws.audioscrobbler.com/2.0/'
 secret = 'the_secret_sauce'
 
 def authorize(user_token):
-    stringToHash = 'api_key' + os.environ['LAST_FM_API'] + 'method' + 'auth.getSession' + 'token' + user_token + secret
-    stringToHash = stringToHash.encode('utf8')
-    requestHash = md5.new(stringToHash).hexdigest()
-    params = {'api_key': os.environ['LAST_FM_API'], 'method': 'auth.getSession', 'token': user_token, 'api_sig': requestHash}
+    params = {'api_key': os.environ['LAST_FM_API'], 'method': 'auth.getSession', 'token': user_token}
+    requestHash = hashRequest(params, secret)
+    params['api_sig'] = requestHash
     apiResp = requests.post(api_head, params)
     return apiResp.text
 
 def scrobble(song_name, artist_name, session_key):
-    apiResp = requests.post('http://ws.audioscrobbler.com/2.0/', {'method': 'track.updateNowPlaying', 'apiKey': os.environ['LAST_FM_API'], 'track': song_name, 'artist': artist_name, 'sk': session_key})
+    params = {'method': 'track.updateNowPlaying', 'apiKey': os.environ['LAST_FM_API'], 'track': song_name, 'artist': artist_name, 'sk': session_key}
+    requestHash = hashRequest(params, secret)
+    params['api_sig'] = requestHash
+    apiResp = requests.post(api_head, params)
+    apiResp = requests.post('http://ws.audioscrobbler.com/2.0/', params)
     print apiResp.text
+
+def hashRequest(obj, secretKey):
+    string = ''
+    for i in obj.keys():
+        string += i
+        string += obj[i]
+    string += secretKey
+    stringToHash = string.encode('utf8')
+    requestHash = md5.new(stringToHash).hexdigest()
+    return requestHash
