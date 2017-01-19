@@ -9,10 +9,8 @@ secret = 'the_secret_sauce'
 def authorize(user_token):
     stringToHash = 'api_key' + os.environ['LAST_FM_API'] + 'method' + 'auth.getSession' + 'token' + user_token + secret
     stringToHash = stringToHash.encode('utf8')
-    print stringToHash
-    requestHash = md5.new(stringToHash).digest()
+    requestHash = md5.new(stringToHash).hexdigest()
     params = {'api_key': os.environ['LAST_FM_API'], 'method': 'auth.getSession', 'token': user_token, 'api_sig': requestHash}
-    print params
     apiResp = requests.post(api_head, params)
     return apiResp.text
 
