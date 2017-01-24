@@ -1,11 +1,12 @@
 # Last.fm Syncing Tool
 # Lean, fast, and functional
 import os
+import time
 import requests
 import md5
 
 api_head = 'http://ws.audioscrobbler.com/2.0/'
-secret = 'the_secret_sauce'
+secret = os.environ['LAST_FM_API_SECRET']
 
 def authorize(user_token):
     params = {
@@ -18,10 +19,25 @@ def authorize(user_token):
     apiResp = requests.post(api_head, params)
     return apiResp.text
 
-def scrobble(song_name, artist_name, session_key):
+def nowPlaying(song_name, artist_name, session_key):
     params = {
             'method': 'track.updateNowPlaying',
-            'apiKey': os.environ['LAST_FM_API'],
+            'api_key': os.environ['LAST_FM_API'],
+            'track': song_name,
+            'artist': artist_name,
+            'sk': session_key
+            }
+    requestHash = hashRequest(params, secret)
+    params['api_sig'] = requestHash
+    apiResp = requests.post(api_head, params)
+    return apiResp.text
+
+def scrobble(song_name, artist_name, session_key):
+    # Currently this sort of cheats the timestamp protocol
+    params = {
+            'method': 'track.scrobble',
+            'api_key': os.environ['LAST_FM_API'],
+            'timestamp': str( int(time.time() - 30) ),
             'track': song_name,
             'artist': artist_name,
             'sk': session_key
@@ -33,7 +49,9 @@ def scrobble(song_name, artist_name, session_key):
 
 def hashRequest(obj, secretKey):
     string = ''
-    for i in obj.keys():
+    items = obj.keys()
+    items.sort()
+    for i in items:
         string += i
         string += obj[i]
     string += secretKey
