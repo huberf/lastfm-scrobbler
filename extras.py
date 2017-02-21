@@ -1,14 +1,20 @@
 # Here are a few functions that aren't critical to properly scrobbling a song
 # However, I they were fun to put together and might be of use to others.
 import requests
+import datetime
 import os
 
 api_root = 'http://ws.audioscrobbler.com/2.0/'
 
 def user_tracks(user_name):
     resp = requests.get(api_root + '?method=user.getrecenttracks&user=' + user_name + '&api_key=' + os.environ['LAST_FM_API'] + '&format=json')
-    print resp.text
+    return resp.text
 
 def user_weekly_tracks(user_name):
     resp = requests.get(api_root + '?method=user.getweeklytrackchart&user=' + user_name + '&api_key=' + os.environ['LAST_FM_API'] + '&format=json')
-    print resp.text
+    return resp.text
+
+def user_daily_tracks(user_name):
+    dayStart = datetime.datetime.today().replace(hour=0, minute=0, second=0, microsecond=0).strftime("%s")
+    resp = requests.get(api_root + '?method=user.getrecenttracks&user=' + user_name + '&api_key=' + os.environ['LAST_FM_API'] + '&from=' + str(dayStart) + '&limit=200' +'&format=json')
+    return resp.text
