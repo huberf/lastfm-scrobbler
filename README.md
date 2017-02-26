@@ -3,7 +3,13 @@
 This is a lightweight script that can easily integrate with other applications
 to provide scrobbling capabilities for any service.
 
-## Setup
+## Setup (With Pip)
+* Run `pip install lastpy`
+* Create the environment variable `LAST_FM_API` and `LAST_FM_API_SECRET` with your [Last.fm API
+  Key](http://www.last.fm/api/authentication)
+* Now import the library, and run the `scrobble` function to start saving songs.
+
+## Setup (From Source)
 * First `git clone https://github.com/huberf/lastfm-scrobbler`
 * Make sure you have the `requests` library installed.
 * Create the environment variable `LAST_FM_API` and `LAST_FM_API_SECRET` with your [Last.fm API
