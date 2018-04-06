@@ -2,10 +2,13 @@ import extras
 import datetime
 import json
 
-USER_NAME = 'your_user_name'
+USER_NAME = 'nhuberfeely'
 data = extras.user_daily_tracks(USER_NAME)
 count = data['recenttracks']['@attr']['total']
-print data['recenttracks']['track'][0]
+try:
+    print data['recenttracks']['track'][0]
+except:
+    print "No scrobbles yet for today!"
 print "Total Daily Tracks: " + str(count)
 
 # 9*60*60
