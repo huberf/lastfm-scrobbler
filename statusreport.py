@@ -5,18 +5,24 @@ import json
 USER_NAME = 'nhuberfeely'
 data = extras.user_daily_tracks(USER_NAME)
 count = data['recenttracks']['@attr']['total']
-try:
+noScrobbles = False
+if len(data['recenttracks']['track']) == 0:
+    noScrobbles = True
+if not noScrobbles:
     print data['recenttracks']['track'][0]
-except:
+    print "Total Daily Tracks: " + str(count)
+else:
     print "No scrobbles yet for today!"
-print "Total Daily Tracks: " + str(count)
 
 # 9*60*60
 workday = 32400
 dayStart = datetime.datetime.today().replace(hour=0, minute=0, second=0, microsecond=0).strftime("%s")
 currentTotal = float(datetime.datetime.today().strftime("%s")) - (float(dayStart) + (8*60*60))
 ratio = workday/currentTotal
-print "Expected scrobbles: " + str(int(int(count) * ratio))
+if not noScrobbles:
+    print "Expected scrobbles: " + str(int(int(count) * ratio))
+else:
+    print "Start scrobbling to get your expected track count"
 
 data = extras.user_yearly_tracks(USER_NAME)
 count = data['recenttracks']['@attr']['total']
