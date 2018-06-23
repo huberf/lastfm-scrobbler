@@ -1,13 +1,13 @@
 from setuptools import setup
 setup(
   name = 'lastpy',
-  packages = ['lastpy'], # this must be the same as the name above
-  version = '1.0.5',
+  packages = ['lastpy'],
+  version = '1.0.6',
   description = 'A straightforward utility for scrobbling tracks to last.fm',
   author = 'Noah Huber-Feely',
   author_email = 'nhuberfeely@gmail.com',
-  url = 'https://github.com/huberf/lastfm-scrobbler', # use the URL to the github repo
-  download_url = 'https://github.com/huberf/lastfm-scrobbler/archive/1.0.5.tar.gz', # I'll explain this in a second
-  keywords = ['lastfm'], # arbitrary keywords
+  url = 'https://github.com/huberf/lastfm-scrobbler',
+  download_url = 'https://github.com/huberf/lastfm-scrobbler/archive/1.0.6.tar.gz',
+  keywords = ['lastfm'],
   classifiers = [],
 )
