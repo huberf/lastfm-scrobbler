@@ -3,7 +3,7 @@
 import os
 import time
 import requests
-import md5
+import hashlib
 
 api_head = 'http://ws.audioscrobbler.com/2.0/'
 secret = os.environ['LAST_FM_API_SECRET']
@@ -56,5 +56,5 @@ def hashRequest(obj, secretKey):
         string += obj[i]
     string += secretKey
     stringToHash = string.encode('utf8')
-    requestHash = md5.new(stringToHash).hexdigest()
+    requestHash = hashlib.md5(stringToHash).hexdigest()
     return requestHash
