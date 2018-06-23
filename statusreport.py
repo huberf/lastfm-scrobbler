@@ -9,10 +9,10 @@ noScrobbles = False
 if len(data['recenttracks']['track']) == 0:
     noScrobbles = True
 if not noScrobbles:
-    print data['recenttracks']['track'][0]
-    print "Total Daily Tracks: " + str(count)
+    print(data['recenttracks']['track'][0])
+    print("Total Daily Tracks: " + str(count))
 else:
-    print "No scrobbles yet for today!"
+    print("No scrobbles yet for today!")
 
 # 9*60*60
 workday = 32400
@@ -20,13 +20,13 @@ dayStart = datetime.datetime.today().replace(hour=0, minute=0, second=0, microse
 currentTotal = float(datetime.datetime.today().strftime("%s")) - (float(dayStart) + (8*60*60))
 ratio = workday/currentTotal
 if not noScrobbles:
-    print "Expected scrobbles: " + str(int(int(count) * ratio))
+    print("Expected scrobbles: " + str(int(int(count) * ratio)))
 else:
-    print "Start scrobbling to get your expected track count"
+    print("Start scrobbling to get your expected track count")
 
 data = extras.user_yearly_tracks(USER_NAME)
 count = data['recenttracks']['@attr']['total']
-print "Year Total: " + str(count)
+print("Year Total: " + str(count))
 yearStart = datetime.datetime(2018,1,1,0,0,0)
 # Round up the day
 current = datetime.datetime.now() + datetime.timedelta(days=1)
@@ -34,6 +34,6 @@ daysPassed = (current-yearStart).days
 # Add your own yearly scrobble goal
 yearGoal = 18000
 requirement = (yearGoal/365)*daysPassed
-print "Year Goal: " + str(requirement)
+print("Year Goal: " + str(requirement))
 if count < requirement:
-    print "You are behind. Try listening more to catch back up."
+    print("You are behind. Try listening more to catch back up.")
