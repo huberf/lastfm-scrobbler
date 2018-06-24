@@ -9,7 +9,8 @@ noScrobbles = False
 if len(data['recenttracks']['track']) == 0:
     noScrobbles = True
 if not noScrobbles:
-    print(data['recenttracks']['track'][0])
+    lastTrack = data['recenttracks']['track'][0]
+    print("Your last scrobble: " + str(lastTrack['name']) + ' by ' + str(lastTrack['artist']['#text']))
     print("Total Daily Tracks: " + str(count))
 else:
     print("No scrobbles yet for today!")

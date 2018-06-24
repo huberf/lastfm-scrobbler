@@ -30,6 +30,9 @@ to provide scrobbling capabilities for any service.
 * Profit?
 
 ## Scrobbling
-* Import 'lastfm' into any project you want, and run the 'scrobble' function
+* Import 'lastpy' into any project you want, and run the 'scrobble' function
   supplying the song name, artist name, and user auth token. The library will
   handle the rest.
+
+## Extras
+To view account data retreival, consult the `statusreport.py` file in this repo.
