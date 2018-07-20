@@ -15,8 +15,8 @@ def user_weekly_tracks(user_name):
     resp = requests.get(api_root + '?method=user.getweeklytrackchart&user=' + user_name + '&api_key=' + os.environ['LAST_FM_API'] + '&format=json')
     return json.loads(resp.text)
 
-def user_daily_tracks(user_name):
-    dayStart = datetime.datetime.today().replace(hour=0, minute=0, second=0, microsecond=0).strftime("%s")
+def user_daily_tracks(user_name, days=0):
+    dayStart = datetime.datetime.today().replace(days=-days, hour=0, minute=0, second=0, microsecond=0).strftime("%s")
     resp = requests.get(api_root + '?method=user.getrecenttracks&user=' + user_name + '&api_key=' + os.environ['LAST_FM_API'] + '&from=' + str(dayStart) + '&limit=200' +'&format=json')
     return json.loads(resp.text)
 
