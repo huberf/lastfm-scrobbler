@@ -25,6 +25,9 @@ if not noScrobbles:
 else:
     print("Start scrobbling to get your expected track count")
 
+yesterday = extras.user_daily_tracks(USER_NAME, 1)
+print("Yesterday scrobbles: " + str(yesterday['recenttracks']['@attr']['total']))
+
 data = extras.user_yearly_tracks(USER_NAME)
 count = int(data['recenttracks']['@attr']['total'])
 print("Year Total: " + str(count))
