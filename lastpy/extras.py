@@ -20,7 +20,7 @@ def user_daily_tracks(user_name, days=0, limit=200):
     dayStart = dayStart.strftime('%s')
     dayEnd = datetime.datetime.today().replace(hour=0, minute=0, second=0, microsecond=0) + datetime.timedelta(days=-days+1)
     dayEnd = dayEnd.strftime('%s')
-    resp = requests.get(api_root + '?method=user.getrecenttracks&user=' + user_name + '&api_key=' + os.environ['LAST_FM_API'] + '&from=' + str(dayStart) + '&to' + str(dayEnd) + '&limit=' + str(limit) +'&format=json')
+    resp = requests.get(api_root + '?method=user.getrecenttracks&user=' + user_name + '&api_key=' + os.environ['LAST_FM_API'] + '&from=' + str(dayStart) + '&to=' + str(dayEnd) + '&limit=' + str(limit) +'&format=json')
     return json.loads(resp.text)
 
 def user_yearly_tracks(user_name):
