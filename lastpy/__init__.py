@@ -32,12 +32,12 @@ def nowPlaying(song_name, artist_name, session_key):
     apiResp = requests.post(api_head, params)
     return apiResp.text
 
-def scrobble(song_name, artist_name, session_key):
+def scrobble(song_name, artist_name, session_key, timestamp=None):
     # Currently this sort of cheats the timestamp protocol
     params = {
             'method': 'track.scrobble',
             'api_key': os.environ['LAST_FM_API'],
-            'timestamp': str( int(time.time() - 30) ),
+            'timestamp': str( int(time.time() - 30) ) if timestamp is None else timestamp,
             'track': song_name,
             'artist': artist_name,
             'sk': session_key
